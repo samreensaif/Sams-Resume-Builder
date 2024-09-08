@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Input Form - Sam's Resume Builder</title>
+    <title>Input Form</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="whatsappAvatar.webp">
 </head>
+
 <body>
     <header class="header">
         <h2>Fill in Your Details</h2>
     </header>
 
-    <main>
+    <main id="form-main">
         <form id="input-form">
+            
             <!-- Personal Information -->
+
             <fieldset id="personal">
                 <legend>Personal Information</legend>
                 <div class="form-group">
@@ -28,9 +33,14 @@
                     <label for="phone">Phone Number:</label>
                     <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number">
                 </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <input type="tel" id="address" name="address" required placeholder="Enter your complete address">
+                </div>
             </fieldset>
 
             <!-- Work Experience -->
+
             <fieldset id="work-experience">
                 <legend>Work Experience</legend>
                 <div class="form-group">
@@ -42,25 +52,30 @@
                     <input type="text" id="company" name="company" placeholder="Enter company name">
                 </div>
                 <div class="form-group">
-                    <label for="work-duration">Duration(From):</label>
-                    <input type="date" id="work-duration" name="work-duration" placeholder="Enter duration (e.g., Jan 2020 - Dec 2022)">
+                    <label for="work-duration-from">Duration(From):</label>
+                    <input type="date" id="work-duration-from" name="work-duration"
+                        placeholder="Enter duration (e.g., Jan 2020 - Dec 2022)">
                 </div>
                 <div class="form-group">
-                    <label for="work-duration">Duration(To):</label>
-                    <input type="date" id="work-duration" name="work-duration" placeholder="Enter duration (e.g., Jan 2020 - Dec 2022)">
+                    <label for="work-duration-to">Duration(To):</label>
+                    <input type="date" id="work-duration-to" name="work-duration"
+                        placeholder="Enter duration (e.g., Jan 2020 - Dec 2022)">
                 </div>
                 <div class="form-group">
                     <label for="job-description">Job Description:</label>
-                    <textarea id="job-description" name="job-description" rows="4" placeholder="Briefly describe your job responsibilities"></textarea>
+                    <textarea id="job-description" name="job-description" rows="4"
+                        placeholder="Briefly describe your job responsibilities"></textarea>
                 </div>
             </fieldset>
 
             <!-- Education -->
+
             <fieldset id="education">
                 <legend>Education</legend>
                 <div class="form-group">
                     <label for="degree">Degree:</label>
-                    <input type="text" id="degree" name="degree" placeholder="Enter your degree (e.g., B.Sc. Computer Science)">
+                    <input type="text" id="degree" name="degree"
+                        placeholder="Enter your degree (e.g., B.Sc. Computer Science)">
                 </div>
                 <div class="form-group">
                     <label for="institution">Institution Name:</label>
@@ -68,37 +83,45 @@
                 </div>
                 <div class="form-group">
                     <label for="graduation-year">Year of Graduation:</label>
-                    <input type="text" id="graduation-year" name="graduation-year" placeholder="Enter graduation year">
+                    <input type="date" id="graduation-year" name="graduation-year" placeholder="Enter graduation year">
                 </div>
             </fieldset>
 
             <!-- Achievements -->
-            <fieldset id="achievements">
+
+            <fieldset id="achievementsfieldset">
                 <legend>Achievements</legend>
                 <div class="form-group">
-                    <label for="achievement">Achievement:</label>
-                    <textarea id="achievement" name="achievement" rows="4" placeholder="Enter your achievements"></textarea>
+                    <label for="achievements">Enter Your Achievements:</label>
+                    <textarea id="achievements" name="achievements" rows="4"
+                        placeholder="Enter achievements"></textarea>
+                    
                 </div>
             </fieldset>
 
             <!-- Skills -->
-            <fieldset id="skills">
+
+            <fieldset id="skillsfieldset">
                 <legend>Skills</legend>
                 <div class="form-group">
                     <label for="skills">List Your Skills:</label>
-                    <textarea id="skills" name="skills" rows="4" placeholder="List your skills (e.g., JavaScript, HTML, CSS)"></textarea>
+                    <textarea id="skills" name="skills" rows="4"
+                        placeholder="List your skills (e.g., JavaScript, HTML, CSS)"></textarea>
                 </div>
             </fieldset>
 
-            <button type="submit" class="button">Generate Resume</button>
+            <button type="submit" id="button2">Generate Resume</button>
         </form>
     </main>
 
     <footer class="footer">
         <div class="container">
-            <p>Developed and Designed by <a href="https://github.com/samreensaif/Sams-Resume-Builder.git" target="_blank" class="link">Samreen Saif</a></p>
+            <p>Developed and Designed by <a href="https://github.com/samreensaif/Sams-Resume-Builder.git"
+                    target="_blank" class="link">Samreen Saif</a></p>
             <p>&copy; All Rights Reserved by Samreen Saif</p>
         </div>
     </footer>
+    <script src="main.js" ></script>
 </body>
+
 </html>
