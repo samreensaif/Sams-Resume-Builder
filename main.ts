@@ -1,37 +1,37 @@
 
-document.addEventListener("DOMContentLoaded", function(event) {
+document.addEventListener("DOMContentLoaded", function (event) {
 
-    let inputForm:any = document.getElementById('input-form');
-console.log(inputForm)
+    let inputForm: any = document.getElementById('input-form');
+    console.log(inputForm)
     // Personal Information
-    let name :any= document.getElementById('name');
-    let email :any= document.getElementById('email');
-    let phone :any= document.getElementById('phone');
-    let address :any= document.getElementById('address');
+    let name: any = document.getElementById('name');
+    let email: any = document.getElementById('email');
+    let phone: any = document.getElementById('phone');
+    let address: any = document.getElementById('address');
     console.log(name)
 
     // Work Experience
-    let jobTitle:any = document.getElementById('job-title');
-    let company:any = document.getElementById('company');
-    let workDurationFrom:any = document.getElementById('work-duration-from');
-    let workDurationTo:any = document.getElementById('work-duration-to');
-    let jobDescription:any = document.getElementById('job-description');
+    let jobTitle: any = document.getElementById('job-title');
+    let company: any = document.getElementById('company');
+    let workDurationFrom: any = document.getElementById('work-duration-from');
+    let workDurationTo: any = document.getElementById('work-duration-to');
+    let jobDescription: any = document.getElementById('job-description');
 
     // Education
-    let degree:any = document.getElementById('degree');
-    let institution:any = document.getElementById('institution');
-    let graduationYear:any = document.getElementById('graduation-year');
-    
+    let degree: any = document.getElementById('degree');
+    let institution: any = document.getElementById('institution');
+    let graduationYear: any = document.getElementById('graduation-year');
+
     // Achievements
-    let achievements:any = document.getElementById('achievements');
+    let achievements: any = document.getElementById('achievements');
     console.log(achievements)
-    
+
     // Skills
-    let skills:any = document.getElementById('skills');
+    let skills: any = document.getElementById('skills');
     console.log(skills)
-    
+
     // Add event listener to form submit
-    inputForm.addEventListener('submit', function(event:any) {
+    inputForm.addEventListener('submit', function (event: any) {
         event.preventDefault();
 
         // Store form data in localStorage

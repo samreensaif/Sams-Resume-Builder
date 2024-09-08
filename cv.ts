@@ -1,5 +1,5 @@
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Get the data from localStorage
     const cvData = JSON.parse(localStorage.getItem('cvData') || '{}');
     console.log("This is a test message");
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
         const cvEmail = document.getElementById('cv-email');
         const cvPhone = document.getElementById('cv-phone');
         const cvAddress = document.getElementById('cv-address');
-        
+
         if (cvName) cvName.textContent = cvData.name || '';
         if (cvEmail) cvEmail.textContent = cvData.email || '';
         if (cvPhone) cvPhone.textContent = cvData.phone || '';
@@ -50,9 +50,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
 //add event listener for download cv button
 
-let downloadcv:any=document.getElementById("download-cv");
-downloadcv.addEventListener("click", function() {
+let downloadcv: any = document.getElementById("download-cv");
+downloadcv.addEventListener("click", function () {
     window.print();
-    });
+});
 
 
