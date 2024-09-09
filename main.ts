@@ -1,60 +1,86 @@
 
-document.addEventListener("DOMContentLoaded", function (event) {
 
-    let inputForm: any = document.getElementById('input-form');
-    console.log(inputForm)
-    // Personal Information
-    let name: any = document.getElementById('name');
-    let email: any = document.getElementById('email');
-    let phone: any = document.getElementById('phone');
-    let address: any = document.getElementById('address');
-    console.log(name)
+document.addEventListener("DOMContentLoaded", function () {
+    // Get references to the form and the button
+    const inputForm = document.getElementById('input-form') as HTMLFormElement;
+    const generateResumeButton = document.getElementById('button2') as HTMLButtonElement;
 
-    // Work Experience
-    let jobTitle: any = document.getElementById('job-title');
-    let company: any = document.getElementById('company');
-    let workDurationFrom: any = document.getElementById('work-duration-from');
-    let workDurationTo: any = document.getElementById('work-duration-to');
-    let jobDescription: any = document.getElementById('job-description');
+    // Add event listener to the "Generate Resume" button
+    generateResumeButton.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent the default button behavior
 
-    // Education
-    let degree: any = document.getElementById('degree');
-    let institution: any = document.getElementById('institution');
-    let graduationYear: any = document.getElementById('graduation-year');
+        // Get form data
+        const name = (document.getElementById('name') as HTMLInputElement).value;
+        const email = (document.getElementById('email') as HTMLInputElement).value;
+        const phone = (document.getElementById('phone') as HTMLInputElement).value;
+        const address = (document.getElementById('address') as HTMLInputElement).value;
+        const jobTitle = (document.getElementById('job-title') as HTMLInputElement).value;
+        const company = (document.getElementById('company') as HTMLInputElement).value;
+        const workDurationFrom = (document.getElementById('work-duration-from') as HTMLInputElement).value;
+        const workDurationTo = (document.getElementById('work-duration-to') as HTMLInputElement).value;
+        const jobDescription = (document.getElementById('job-description') as HTMLInputElement).value;
+        const degree = (document.getElementById('degree') as HTMLInputElement).value;
+        const institution = (document.getElementById('institution') as HTMLInputElement).value;
+        const graduationYear = (document.getElementById('graduation-year') as HTMLInputElement).value;
+        const achievements = (document.getElementById('achievements') as HTMLInputElement).value;
+        const skills = (document.getElementById('skills') as HTMLInputElement).value;
 
-    // Achievements
-    let achievements: any = document.getElementById('achievements');
-    console.log(achievements)
+        // Handle image
+        const fileInput:any = document.getElementById('image') as HTMLInputElement;
+        const file = fileInput.files[0];
+        let imageData: string | null = null;
 
-    // Skills
-    let skills: any = document.getElementById('skills');
-    console.log(skills)
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                imageData = reader.result as string;
 
-    // Add event listener to form submit
-    inputForm.addEventListener('submit', function (event: any) {
-        event.preventDefault();
+                // Save all data to localStorage
+                localStorage.setItem('cvData', JSON.stringify({
+                    name,
+                    email,
+                    phone,
+                    address,
+                    jobTitle,
+                    company,
+                    workDurationFrom,
+                    workDurationTo,
+                    jobDescription,
+                    degree,
+                    institution,
+                    graduationYear,
+                    achievements,
+                    skills,
+                    image: imageData
+                }));
 
-        // Store form data in localStorage
-        localStorage.setItem('cvData', JSON.stringify({
-            name: name.value,
-            email: email.value,
-            phone: phone.value,
-            address: address.value,
-            jobTitle: jobTitle.value,
-            company: company.value,
-            workDurationFrom: workDurationFrom.value,
-            workDurationTo: workDurationTo.value,
-            jobDescription: jobDescription.value,
-            degree: degree.value,
-            institution: institution.value,
-            graduationYear: graduationYear.value,
-            achievements: achievements.value,
-            skills: skills.value
-        }));
+                // Redirect to the resume display page
+                window.location.href = 'cv.html';
+            };
+            reader.readAsDataURL(file); // Convert image to Base64 data URL
+        } else {
+            // If no image file is selected, save form data without the image
+            localStorage.setItem('cvData', JSON.stringify({
+                name,
+                email,
+                phone,
+                address,
+                jobTitle,
+                company,
+                workDurationFrom,
+                workDurationTo,
+                jobDescription,
+                degree,
+                institution,
+                graduationYear,
+                achievements,
+                skills,
+                image: null // Or handle the absence of an image as needed
+            }));
 
-        // Redirect to cv.html
-        window.location.href = 'cv.html';
+            // Redirect to the resume display page
+            window.location.href = 'cv.html';
+        }
     });
 });
-
 

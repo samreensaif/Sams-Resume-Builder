@@ -26,19 +26,19 @@ body {
     padding: 20px;
     width: 100%;
     height: 60px;
-    padding:10px;
+    padding: 10px;
 }
 
- .header h2 {
-    font-size: 35px; 
-    font-family: "SUSE", system-ui;   
+.header h2 {
+    font-size: 35px;
+    font-family: "SUSE", system-ui;
 }
 
-button{
+button {
     width: 130px;
     height: 50px;
     margin-bottom: 20px;
-    
+
     background-color: rgb(194, 194, 239);
     color: black;
     border-radius: 10px;
@@ -61,7 +61,7 @@ button:hover {
     margin: 20px auto;
     background: white;
     padding: 20px;
-    border:2px solid #0044cc;
+    border: 2px solid #0044cc;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -82,11 +82,63 @@ p {
     padding: 5px 0;
 }
 
+#cv-image-container {
+    border: 5px solid #0044cc;
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: right;
+    /* Use float instead of absolute positioning */
+    margin-top: 55px;
+    margin-right: 50px;
+}
+
+#cv-image {
+    width: 100%;
+    height: auto;
+    /* Ensure correct scaling */
+    object-fit: cover;
+}
+
+
+
+@media print {
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    #cv-main {
+        page-break-inside: avoid;
+    }
+
+    /* Keep the float for the image, it should print in the correct position */
+    #cv-image-container {
+        float: right;
+        margin-top: 55px;
+        margin-right: 50px;
+    }
+
+    #cv-image {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Hide download button in print */
+    #download-cv {
+        display: none;
+    }
+}
+
+
 /* Footer Styling */
 .footer {
     background-color: darkblue;
     color: white;
-    
+
     width: 100%;
     text-align: center;
     height: 60px;

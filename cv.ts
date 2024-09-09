@@ -44,10 +44,18 @@ document.addEventListener("DOMContentLoaded", function () {
         // Skills
         const cvSkills = document.getElementById('cv-skills');
         if (cvSkills) cvSkills.textContent = cvData.skills || '';
-    }
+
+        
+        // Image
+let cvImage = document.getElementById('cv-image') as HTMLImageElement;
+console.log(cvImage);
+
+if (cvImage) {
+    cvImage.src = cvData.image;
+}
+
+}
 });
-
-
 //add event listener for download cv button
 
 let downloadcv: any = document.getElementById("download-cv");

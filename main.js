@@ -1,50 +1,78 @@
 "use strict";
-document.addEventListener("DOMContentLoaded", function (event) {
-    let inputForm = document.getElementById('input-form');
-    console.log(inputForm);
-    // Personal Information
-    let name = document.getElementById('name');
-    let email = document.getElementById('email');
-    let phone = document.getElementById('phone');
-    let address = document.getElementById('address');
-    console.log(name);
-    // Work Experience
-    let jobTitle = document.getElementById('job-title');
-    let company = document.getElementById('company');
-    let workDurationFrom = document.getElementById('work-duration-from');
-    let workDurationTo = document.getElementById('work-duration-to');
-    let jobDescription = document.getElementById('job-description');
-    // Education
-    let degree = document.getElementById('degree');
-    let institution = document.getElementById('institution');
-    let graduationYear = document.getElementById('graduation-year');
-    // Achievements
-    let achievements = document.getElementById('achievements');
-    console.log(achievements);
-    // Skills
-    let skills = document.getElementById('skills');
-    console.log(skills);
-    // Add event listener to form submit
-    inputForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        // Store form data in localStorage
-        localStorage.setItem('cvData', JSON.stringify({
-            name: name.value,
-            email: email.value,
-            phone: phone.value,
-            address: address.value,
-            jobTitle: jobTitle.value,
-            company: company.value,
-            workDurationFrom: workDurationFrom.value,
-            workDurationTo: workDurationTo.value,
-            jobDescription: jobDescription.value,
-            degree: degree.value,
-            institution: institution.value,
-            graduationYear: graduationYear.value,
-            achievements: achievements.value,
-            skills: skills.value
-        }));
-        // Redirect to cv.html
-        window.location.href = 'cv.html';
+document.addEventListener("DOMContentLoaded", function () {
+    // Get references to the form and the button
+    const inputForm = document.getElementById('input-form');
+    const generateResumeButton = document.getElementById('button2');
+    // Add event listener to the "Generate Resume" button
+    generateResumeButton.addEventListener('click', function (event) {
+        event.preventDefault(); // Prevent the default button behavior
+        // Get form data
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const address = document.getElementById('address').value;
+        const jobTitle = document.getElementById('job-title').value;
+        const company = document.getElementById('company').value;
+        const workDurationFrom = document.getElementById('work-duration-from').value;
+        const workDurationTo = document.getElementById('work-duration-to').value;
+        const jobDescription = document.getElementById('job-description').value;
+        const degree = document.getElementById('degree').value;
+        const institution = document.getElementById('institution').value;
+        const graduationYear = document.getElementById('graduation-year').value;
+        const achievements = document.getElementById('achievements').value;
+        const skills = document.getElementById('skills').value;
+        // Handle image
+        const fileInput = document.getElementById('image');
+        const file = fileInput.files[0];
+        let imageData = null;
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                imageData = reader.result;
+                // Save all data to localStorage
+                localStorage.setItem('cvData', JSON.stringify({
+                    name,
+                    email,
+                    phone,
+                    address,
+                    jobTitle,
+                    company,
+                    workDurationFrom,
+                    workDurationTo,
+                    jobDescription,
+                    degree,
+                    institution,
+                    graduationYear,
+                    achievements,
+                    skills,
+                    image: imageData
+                }));
+                // Redirect to the resume display page
+                window.location.href = 'cv.html';
+            };
+            reader.readAsDataURL(file); // Convert image to Base64 data URL
+        }
+        else {
+            // If no image file is selected, save form data without the image
+            localStorage.setItem('cvData', JSON.stringify({
+                name,
+                email,
+                phone,
+                address,
+                jobTitle,
+                company,
+                workDurationFrom,
+                workDurationTo,
+                jobDescription,
+                degree,
+                institution,
+                graduationYear,
+                achievements,
+                skills,
+                image: null // Or handle the absence of an image as needed
+            }));
+            // Redirect to the resume display page
+            window.location.href = 'cv.html';
+        }
     });
 });
