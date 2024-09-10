@@ -83,7 +83,7 @@ p {
 }
 
 #cv-image-container {
-    border: 5px solid #0044cc;
+    border: 2px solid #0044cc;
     width: 150px;
     height: 150px;
     overflow: hidden;
@@ -94,6 +94,7 @@ p {
     /* Use float instead of absolute positioning */
     margin-top: 55px;
     margin-right: 50px;
+    border-radius: 5px;
 }
 
 #cv-image {

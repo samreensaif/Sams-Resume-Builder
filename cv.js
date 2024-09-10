@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (cvCompany)
             cvCompany.textContent = cvData.company || '';
         if (cvWorkDuration)
-            cvWorkDuration.textContent = `${cvData.workDurationFrom || ''} to ${cvData.workDurationTo || ''}`;
+            cvWorkDuration.textContent = ` ${cvData.workDurationFrom || ''} - ${cvData.workDurationTo || ''}`;
         if (cvJobDescription)
             cvJobDescription.textContent = cvData.jobDescription || '';
         // Education
@@ -61,4 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
 let downloadcv = document.getElementById("download-cv");
 downloadcv.addEventListener("click", function () {
     window.print();
+});
+let editcv = document.getElementById("edit-cv");
+editcv.addEventListener("click", function () {
+    window.location.href = "form.html";
 });
