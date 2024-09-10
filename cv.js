@@ -62,7 +62,10 @@ let downloadcv = document.getElementById("download-cv");
 downloadcv.addEventListener("click", function () {
     window.print();
 });
-let editcv = document.getElementById("edit-cv");
-editcv.addEventListener("click", function () {
-    window.location.href = "form.html";
-});
+// add event listener for edit cv button
+const editcv = document.getElementById("edit-cv");
+if (editcv) {
+    editcv.addEventListener("click", function () {
+        window.location.href = "form.html"; // Redirect to form.html to edit the CV
+    });
+}
