@@ -1,62 +1,29 @@
 "use strict";
 document.addEventListener("DOMContentLoaded", function () {
-    let generateResumeButton = document.getElementById('button2');
-    //  event listener for "Generate Resume" button
-    generateResumeButton.addEventListener('click', function (event) {
-        // Prevent the default button behavior(which may cause loss of data+refresh webpage+sending data to server. by using this ts process the data and save the data in localstorage.)
+    const myForm = document.getElementById('input-form');
+    myForm.addEventListener("submit", (event) => {
         event.preventDefault();
-        // get all the form data
-        let name = document.getElementById('name').value;
-        console.log(name);
-        let email = document.getElementById('email').value;
-        let phone = document.getElementById('phone').value;
-        let address = document.getElementById('address').value;
-        let jobTitle = document.getElementById('job-title').value;
-        let company = document.getElementById('company').value;
-        let workDurationFrom = document.getElementById('work-duration-from').value;
-        let workDurationTo = document.getElementById('work-duration-to').value;
-        let jobDescription = document.getElementById('job-description').value;
-        let degree = document.getElementById('degree').value;
-        let institution = document.getElementById('institution').value;
-        let graduationYear = document.getElementById('graduation-year').value;
-        let achievements = document.getElementById('achievements').value;
-        let skills = document.getElementById('skills').value;
-        // Handle image
-        let fileInput = document.getElementById('image');
-        let file = fileInput.files[0];
-        let imageData = null;
-        let defaultImage = "blankPic.jpg";
-        if (file) {
-            //FileReader is used to convert image in the form of string(base64)
-            let reader = new FileReader();
-            reader.onloadend = () => {
-                imageData = reader.result;
-                // Save all data to localStorage
-                localStorage.setItem('cvData', JSON.stringify({
-                    name,
-                    email,
-                    phone,
-                    address,
-                    jobTitle,
-                    company,
-                    workDurationFrom,
-                    workDurationTo,
-                    jobDescription,
-                    degree,
-                    institution,
-                    graduationYear,
-                    achievements,
-                    skills,
-                    image: imageData
-                }));
-                // Redirect to the resume display page
-                window.location.href = 'cv.html';
-            };
-            reader.readAsDataURL(file); // Convert image to Base64 data URL
-        }
-        else {
-            // If no image file is selected, save form data without the image
-            localStorage.setItem('cvData', JSON.stringify({
+        // Gather all form data
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const address = document.getElementById('address').value;
+        const jobTitle = document.getElementById('job-title').value;
+        const company = document.getElementById('company').value;
+        const workDurationFrom = document.getElementById('work-duration-from').value;
+        const workDurationTo = document.getElementById('work-duration-to').value;
+        const jobDescription = document.getElementById('job-description').value;
+        const degree = document.getElementById('degree').value;
+        const institution = document.getElementById('institution').value;
+        const graduationYear = document.getElementById('graduation-year').value;
+        const achievements = document.getElementById('achievements').value;
+        const skills = document.getElementById('skills').value;
+        const fileInput = document.getElementById('image');
+        const file = fileInput.files?.[0];
+        const defaultImage = "blankPic.jpg";
+        // Function to store data in localStorage and generate resume URL
+        const storeData = (image) => {
+            const cvData = {
                 name,
                 email,
                 phone,
@@ -71,77 +38,62 @@ document.addEventListener("DOMContentLoaded", function () {
                 graduationYear,
                 achievements,
                 skills,
-                image: defaultImage // if image not present then set the default pic as image on cv
-            }));
-            // Redirect to the resume display page
+                image
+            };
+            localStorage.setItem('cvData', JSON.stringify(cvData));
+            const username = name ? name.toLowerCase().replace(/\s+/g, '-') : 'user'; // Generate username from the name
+            const baseUrl = 'https://http://127.0.0.1:5500/cv.html'; // Your local base URL (adjust if using a deployed site)
+            const uniqueResumeUrl = `${baseUrl}?user=${username}`; // Create unique URL
+            // Redirect to the resume page with the URL
             window.location.href = 'cv.html';
+        };
+        // Handle image file and store data
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                storeData(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+        else {
+            storeData(defaultImage); // Use default image if none is uploaded
         }
     });
 });
-// cv.ts file starts here
-document.addEventListener("DOMContentLoaded", function () {
-    // Get the data from localStorage
-    let cvData = JSON.parse(localStorage.getItem('cvData') || '{}');
+// Handling the CV page population on load
+window.addEventListener("load", function () {
+    const cvData = JSON.parse(localStorage.getItem('cvData') || '{}');
     if (cvData) {
-        // Personal Information
-        let cvName = document.getElementById('cv-name');
-        let cvEmail = document.getElementById('cv-email');
-        let cvPhone = document.getElementById('cv-phone');
-        let cvAddress = document.getElementById('cv-address');
-        if (cvName)
-            cvName.textContent = cvData.name || '';
-        if (cvEmail)
-            cvEmail.textContent = cvData.email || '';
-        if (cvPhone)
-            cvPhone.textContent = cvData.phone || '';
-        if (cvAddress)
-            cvAddress.textContent = cvData.address || '';
-        // Work Experience
-        let cvJobTitle = document.getElementById('cv-job-title');
-        let cvCompany = document.getElementById('cv-company');
-        let cvWorkDuration = document.getElementById('cv-work-duration');
-        let cvJobDescription = document.getElementById('cv-job-description');
-        if (cvJobTitle)
-            cvJobTitle.textContent = cvData.jobTitle || '';
-        if (cvCompany)
-            cvCompany.textContent = cvData.company || '';
-        if (cvWorkDuration)
-            cvWorkDuration.textContent = ` ${cvData.workDurationFrom || ''} - ${cvData.workDurationTo || ''}`;
-        if (cvJobDescription)
-            cvJobDescription.textContent = cvData.jobDescription || '';
-        // Education
-        let cvDegree = document.getElementById('cv-degree');
-        let cvInstitution = document.getElementById('cv-institution');
-        let cvGraduationYear = document.getElementById('cv-graduation-year');
-        if (cvDegree)
-            cvDegree.textContent = cvData.degree || '';
-        if (cvInstitution)
-            cvInstitution.textContent = cvData.institution || '';
-        if (cvGraduationYear)
-            cvGraduationYear.textContent = cvData.graduationYear || '';
-        // Achievements
-        let cvAchievements = document.getElementById('cv-achievements');
-        if (cvAchievements)
-            cvAchievements.textContent = cvData.achievements || '';
-        // Skills
-        let cvSkills = document.getElementById('cv-skills');
-        if (cvSkills)
-            cvSkills.textContent = cvData.skills || '';
-        // Image
-        let cvImage = document.getElementById('cv-image');
-        if (cvImage) {
-            cvImage.src = cvData.image;
-        }
+        document.getElementById('cv-name').textContent = cvData.name || '';
+        document.getElementById('cv-email').textContent = cvData.email || '';
+        document.getElementById('cv-phone').textContent = cvData.phone || '';
+        document.getElementById('cv-address').textContent = cvData.address || '';
+        document.getElementById('cv-job-title').textContent = cvData.jobTitle || '';
+        document.getElementById('cv-company').textContent = cvData.company || '';
+        document.getElementById('cv-work-duration').textContent = `${cvData.workDurationFrom || ''} - ${cvData.workDurationTo || ''}`;
+        document.getElementById('cv-job-description').textContent = cvData.jobDescription || '';
+        document.getElementById('cv-degree').textContent = cvData.degree || '';
+        document.getElementById('cv-institution').textContent = cvData.institution || '';
+        document.getElementById('cv-graduation-year').textContent = cvData.graduationYear || '';
+        document.getElementById('cv-achievements').textContent = cvData.achievements || '';
+        document.getElementById('cv-skills').textContent = cvData.skills || '';
+        document.getElementById('cv-image').src = cvData.image || 'blankPic.jpg';
     }
-});
-//add event listener for download cv button
-let downloadcv = document.getElementById("download-cv");
-downloadcv.addEventListener("click", function () {
-    window.print();
-});
-// add event listener for edit cv button
-let editResumeButton = document.getElementById('edit-cv');
-editResumeButton.addEventListener('click', function (event) {
-    event.preventDefault();
-    window.history.back();
+    // Download CV functionality
+    document.getElementById("download-cv")?.addEventListener("click", function () {
+        window.print();
+    });
+    // Edit CV functionality
+    document.getElementById('edit-cv')?.addEventListener('click', function (event) {
+        event.preventDefault();
+        window.history.back();
+    });
+    // Event listener for copying resume link
+    document.getElementById('copyLinkBtn').addEventListener('click', () => {
+        const resumeLink = document.getElementById('resumeLink');
+        const uniqueResumeUrl = resumeLink.getAttribute('href') ?? '';
+        navigator.clipboard.writeText(uniqueResumeUrl).then(() => {
+            alert('Resume link copied to clipboard!');
+        });
+    });
 });
