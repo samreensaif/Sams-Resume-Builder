@@ -41,22 +41,27 @@ document.addEventListener("DOMContentLoaded", function () {
                 image
             };
             localStorage.setItem('cvData', JSON.stringify(cvData));
-            const username = name ? name.toLowerCase().replace(/\s+/g, '-') : 'user'; // Generate username from the name
-            const baseUrl = 'https://http://127.0.0.1:5500/cv.html'; // Your local base URL (adjust if using a deployed site)
-            const uniqueResumeUrl = `${baseUrl}?user=${username}`; // Create unique URL
-            // Redirect to the resume page with the URL
             window.location.href = 'cv.html';
+            const username = name ? name.toLowerCase().replace(/\s+/g, '-') : 'user'; // Generate username from the name
+            const baseUrl = 'https://sams-resume-builder.vercel.app/cv.html'; // Your local base URL (adjust if using a deployed site)
+            const uniqueResumeUrl = `${baseUrl}?user=${username}`; // Create unique URL
+            // Set the resume link in the DOM
+            const resumeLink = document.getElementById('resumeLink');
+            resumeLink.setAttribute('href', uniqueResumeUrl);
+            resumeLink.textContent = uniqueResumeUrl;
         };
         // Handle image file and store data
         if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
                 storeData(reader.result);
+                window.location.href = 'cv.html';
             };
             reader.readAsDataURL(file);
         }
         else {
             storeData(defaultImage); // Use default image if none is uploaded
+            window.location.href = 'cv.html';
         }
     });
 });
