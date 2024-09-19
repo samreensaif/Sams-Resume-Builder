@@ -1,6 +1,7 @@
 "use strict";
 document.addEventListener("DOMContentLoaded", function () {
     const myForm = document.getElementById('input-form');
+    console.log(myForm);
     myForm.addEventListener("submit", (event) => {
         event.preventDefault();
         // Gather all form data
@@ -42,13 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
             };
             localStorage.setItem('cvData', JSON.stringify(cvData));
             window.location.href = 'cv.html';
-            const username = name ? name.toLowerCase().replace(/\s+/g, '-') : 'user'; // Generate username from the name
-            const baseUrl = 'https://sams-resume-builder.vercel.app/cv.html'; // Your local base URL (adjust if using a deployed site)
-            const uniqueResumeUrl = `${baseUrl}?user=${username}`; // Create unique URL
-            // Set the resume link in the DOM
-            const resumeLink = document.getElementById('resumeLink');
-            resumeLink.setAttribute('href', uniqueResumeUrl);
-            resumeLink.textContent = uniqueResumeUrl;
+            
         };
         // Handle image file and store data
         if (file) {
@@ -93,6 +88,16 @@ window.addEventListener("load", function () {
         event.preventDefault();
         window.history.back();
     });
+
+    const username = cvData.name ? cvData.name.toLowerCase().replace(/\s+/g, '-') : 'user';
+
+            const baseUrl = 'https://sams-resume-builder.vercel.app/cv.html'; // Your local base URL (adjust if using a deployed site)
+            const uniqueResumeUrl = `${baseUrl}?user=${username}`; // Create unique URL
+            console.log(uniqueResumeUrl);
+            // Set the resume link in the DOM
+            const resumeLink = document.getElementById('resumeLink');
+            resumeLink.setAttribute('href', uniqueResumeUrl);
+            resumeLink.textContent = uniqueResumeUrl;
     // Event listener for copying resume link
     document.getElementById('copyLinkBtn').addEventListener('click', () => {
         const resumeLink = document.getElementById('resumeLink');

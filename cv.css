@@ -37,13 +37,26 @@ body {
 
 
 
-#btnDiv {
-    display: block;
+#btnDiv1 {
+    
     display: flex;
-    justify-content: space-around;
-    align-items: center;
     margin-top: 20px;
     margin-bottom: 20px;
+  }
+  #download-cv, #edit-cv {
+    width:50%}
+
+    .share-container{
+        display:flex;
+    }
+
+  #resumeLink{
+    
+    width:75%;
+  }
+  #copyLinkBtn{
+    
+    width:25%;
   }
 
 
@@ -96,6 +109,7 @@ p {
     padding: 5px 0;
     
 }
+
 
 #cv-image-container {
     border: 2px solid #0044cc;

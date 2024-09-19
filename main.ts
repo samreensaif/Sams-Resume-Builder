@@ -1,6 +1,10 @@
+
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const myForm = document.getElementById('input-form') as HTMLFormElement;
-
+    console.log(myForm)
     myForm.addEventListener("submit", (event) => {
         event.preventDefault();
 
@@ -53,11 +57,15 @@ document.addEventListener("DOMContentLoaded", function () {
             const username = name ? name.toLowerCase().replace(/\s+/g, '-') : 'user'; // Generate username from the name
             const baseUrl = 'https://sams-resume-builder.vercel.app/cv.html'; // Your local base URL (adjust if using a deployed site)
             const uniqueResumeUrl = `${baseUrl}?user=${username}`; // Create unique URL
+            console.log(uniqueResumeUrl);
 
             // Set the resume link in the DOM
             const resumeLink = document.getElementById('resumeLink') as HTMLAnchorElement;
+
+            
             resumeLink.setAttribute('href', uniqueResumeUrl);
             resumeLink.textContent = uniqueResumeUrl;
+        
             
         };
 
